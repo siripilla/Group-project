@@ -115,7 +115,8 @@
     fetch("https://docs.google.com/forms/d/e/1FAIpQLSeWjFaOBTCH0mWkB5XSoSP_lifA3NI67q3BGPjuhfh6qrjs-A/formResponse", {
       method: "POST",
       body: formData,
-      mode: "no-cors"
+      mode: "no-cors",
+      redirect: "follow"
     })
     .then(() => {
       this.reset();
