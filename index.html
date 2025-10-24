@@ -66,7 +66,7 @@
       <input type="tel" placeholder="Phone Number" required>
       <button type="submit">Submit</button>
     </form>
-    <div id="successMsg" class="success-message">Successfully Registered!</div>
+    <div id="successMsgRegister" class="success-message">Successfully Registered!</div>
   </div>
 
   <div class="container" id="request">
@@ -88,6 +88,7 @@
       <input type="email" placeholder="Contact Email" required>
       <button type="submit">Request</button>
     </form>
+    <div id="successMsgRequest" class="success-message">Successfully requested, please wait for further updates.</div>
   </div>
 
   <div class="container" id="contact">
@@ -99,33 +100,41 @@
     <p>&copy; 2025 Online Blood Donation Management System | Vignan's Institute of Engineering for Women</p>
   </footer>
 
-  <!-- Google Form integration script -->
+  <!-- JavaScript Section -->
   <script>
-  document.getElementById("donorForm").addEventListener("submit", function(e) {
-    e.preventDefault();
+    // Donor Registration form (Google Form)
+    document.getElementById("donorForm").addEventListener("submit", function(e) {
+      e.preventDefault();
 
-    // Map form fields to Google Form entry IDs
-    const formData = new FormData();
-    formData.append("entry.1950972815", this[0].value); // Full Name
-    formData.append("entry.1655314723", this[1].value); // Age
-    formData.append("entry.810918533", this[2].value); // Blood Group
-    formData.append("entry.236175439", this[3].value); // Email
-    formData.append("entry.326235464", this[4].value); // Phone
+      const formData = new FormData();
+      formData.append("entry.1950972815", this[0].value); // Full Name
+      formData.append("entry.1655314723", this[1].value); // Age
+      formData.append("entry.810918533", this[2].value); // Blood Group
+      formData.append("entry.236175439", this[3].value); // Email
+      formData.append("entry.326235464", this[4].value); // Phone
 
-    fetch("https://docs.google.com/forms/d/e/1FAIpQLSeWjFaOBTCH0mWkB5XSoSP_lifA3NI67q3BGPjuhfh6qrjs-A/formResponse", {
-      method: "POST",
-      body: formData,
-      mode: "no-cors",
-      redirect: "follow"
-    })
-    .then(() => {
+      fetch("https://docs.google.com/forms/d/e/1FAIpQLSeWjFaOBTCH0mWkB5XSoSP_lifA3NI67q3BGPjuhfh6qrjs-A/formResponse", {
+        method: "POST",
+        body: formData,
+        mode: "no-cors"
+      })
+      .then(() => {
+        this.reset();
+        const msg = document.getElementById("successMsgRegister");
+        msg.style.display = "block";
+        setTimeout(() => msg.style.display = "none", 3000);
+      })
+      .catch(err => alert("Error submitting donor form: " + err));
+    });
+
+    // Blood Request form (Local success message)
+    document.getElementById("requestForm").addEventListener("submit", function(e) {
+      e.preventDefault();
       this.reset();
-      const msg = document.getElementById("successMsg");
+      const msg = document.getElementById("successMsgRequest");
       msg.style.display = "block";
-      setTimeout(() => msg.style.display = "none", 3000);
-    })
-    .catch(err => alert("Error submitting to Google Form: " + err));
-  });
+      setTimeout(() => msg.style.display = "none", 4000);
+    });
   </script>
 
 </body>
