@@ -15,7 +15,6 @@
     input, select, textarea, button { width: 100%; padding: 10px; margin: 10px 0; }
     footer { background: #b71c1c; color: white; text-align: center; padding: 10px 0; position: fixed; width: 100%; bottom: 0; }
 
-    /* Success Message */
     .success-message {
       text-align: center;
       background: #4CAF50;
@@ -100,18 +99,19 @@
     <p>&copy; 2025 Online Blood Donation Management System | Vignan's Institute of Engineering for Women</p>
   </footer>
 
+  <!-- Google Form integration script -->
   <script>
   document.getElementById("donorForm").addEventListener("submit", function(e) {
     e.preventDefault();
-  
-    // Replace with your actual entry IDs
+
+    // Map form fields to Google Form entry IDs
     const formData = new FormData();
     formData.append("entry.1950972815", this[0].value); // Full Name
     formData.append("entry.1655314723", this[1].value); // Age
     formData.append("entry.810918533", this[2].value); // Blood Group
     formData.append("entry.236175439", this[3].value); // Email
     formData.append("entry.326235464", this[4].value); // Phone
-  
+
     fetch("https://docs.google.com/forms/d/e/1FAIpQLSeWjFaOBTCH0mWkB5XSoSP_lifA3NI67q3BGPjuhfh6qrjs-A/formResponse", {
       method: "POST",
       body: formData,
@@ -126,7 +126,6 @@
     .catch(err => alert("Error submitting to Google Form: " + err));
   });
   </script>
-
 
 </body>
 </html>
